@@ -1,16 +1,16 @@
 Resultados:
 ![image](https://github.com/user-attachments/assets/6a26c8ef-e850-450f-ad55-dac244e86fd9)
 Valores:
-1: ID: 115972.png, Distancia de Coseno: 0.42055535316467285
-2: ID: 116004.png, Distancia de Coseno: 0.2634153366088867
-3: ID: 115993.png, Distancia de Coseno: 0.261054664850235
-4: ID: 115960.png, Distancia de Coseno: 0.22030717134475708
-5: ID: 116000.png, Distancia de Coseno: 0.21623587608337402
-6: ID: 11633.png, Distancia de Coseno: 0.17225629091262817
-7: ID: 115969.png, Distancia de Coseno: 0.16061139106750488
-8: ID: 103440.png, Distancia de Coseno: 0.1374966949224472
-9: ID: 105578.png, Distancia de Coseno: 0.13348284363746643
-10: ID: 115961.png, Distancia de Coseno: 0.13290992379188538
+1: ID: 115972.png, Distancia de Coseno: 0.42055535316467285 
+2: ID: 116004.png, Distancia de Coseno: 0.2634153366088867 
+3: ID: 115993.png, Distancia de Coseno: 0.261054664850235 
+4: ID: 115960.png, Distancia de Coseno: 0.22030717134475708 
+5: ID: 116000.png, Distancia de Coseno: 0.21623587608337402 
+6: ID: 11633.png, Distancia de Coseno: 0.17225629091262817 
+7: ID: 115969.png, Distancia de Coseno: 0.16061139106750488 
+8: ID: 103440.png, Distancia de Coseno: 0.1374966949224472 
+9: ID: 105578.png, Distancia de Coseno: 0.13348284363746643 
+10: ID: 115961.png, Distancia de Coseno: 0.13290992379188538 
 Aciertos: 7/1
 -------------------------------------------------------------------------------------------------------------------------------
 ![image](https://github.com/user-attachments/assets/26758e42-be4c-4aaa-b7a9-f6405feb41d4)
