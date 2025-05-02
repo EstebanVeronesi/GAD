@@ -5,11 +5,11 @@ import psycopg2
 from deepface import DeepFace
 
 # Datos de conexión
-DB_HOST = "172.17.0.2"  # O usa "127.0.0.1" si prefieres
+DB_HOST = "localhost"  # O usa "127.0.0.1" si prefieres 
 DB_PORT = "5432"
-DB_NAME = "postgres"  # O la base de datos que creaste
-DB_USER = "admin"
-DB_PASSWORD = "admin"
+DB_NAME = "Proyecto_final"  # O la base de datos que creaste
+DB_USER = "postgres"
+DB_PASSWORD = "159753"
 
 try:
     conn = psycopg2.connect(
@@ -35,7 +35,7 @@ cursor.execute("""
 conn.commit()
 
 # Carpeta con las imágenes
-carpeta_imagenes = r"C:\faces"
+carpeta_imagenes = r"C:\Prueba GAD"
 
 # Obtener imágenes con nombres numéricos
 imagenes = sorted(
