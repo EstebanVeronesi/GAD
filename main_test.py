@@ -2,12 +2,14 @@ import cv2
 import os
 import re
 import psycopg2
+import numpy as np
+import faiss
 from deepface import DeepFace
 
 # Datos de conexión
-DB_HOST = "localhost"  # O usa "127.0.0.1" si prefieres 
+DB_HOST = "localhost"
 DB_PORT = "5432"
-DB_NAME = "Proyecto_final"  # O la base de datos que creaste
+DB_NAME = "pruebas_final"
 DB_USER = "postgres"
 DB_PASSWORD = "159753"
 
@@ -35,7 +37,7 @@ cursor.execute("""
 conn.commit()
 
 # Carpeta con las imágenes
-carpeta_imagenes = r"C:\Prueba GAD"
+carpeta_imagenes = r"Testset"
 
 # Obtener imágenes con nombres numéricos
 imagenes = sorted(
@@ -55,25 +57,29 @@ for img_nombre in imagenes:
         print(f"❌ Imagen corrupta o no compatible: {ruta_img}, se omite.")
         continue
 
-    # Redimensionar a 640x640
+    # Redimensionar imagen (sin conversión a gris ni ecualización)
     image_resized = cv2.resize(image, (300, 300))
 
-    # Mejorar iluminación y contraste
-    gray = cv2.cvtColor(image_resized, cv2.COLOR_BGR2GRAY)
-    image_resized = cv2.cvtColor(cv2.equalizeHist(gray), cv2.COLOR_GRAY2BGR)
-
-    # Usar DeepFace para detectar rostros y obtener embeddings
+    # Obtener embeddings
     try:
-        # Procesar imagen para obtener embeddings
-        embeddings = DeepFace.represent(image_resized, model_name="VGG-Face", enforce_detection=False)
+        embeddings = DeepFace.represent(
+            image_resized,
+            model_name="Facenet512",
+            enforce_detection=False
+        )
 
-        # Guardar los embeddings en la base de datos
         for embedding in embeddings:
-            embedding_list = embedding['embedding']  # Ya es una lista, no es necesario usar tolist()
+            embedding_vector = np.array(embedding['embedding'], dtype=np.float32)
 
+            # Normalizar L2
+            embedding_vector = np.expand_dims(embedding_vector, axis=0)
+            faiss.normalize_L2(embedding_vector)
+            normalized_embedding = embedding_vector[0].tolist()
+
+            # Insertar en la base de datos
             cursor.execute(
                 "INSERT INTO faces (id, embedding) VALUES (%s, %s) ON CONFLICT (id) DO NOTHING;",
-                (img_nombre, embedding_list),
+                (img_nombre, normalized_embedding),
             )
         conn.commit()
         print(f"✅ Embedding de {img_nombre} guardado en la base de datos.")
